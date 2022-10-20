@@ -1,7 +1,7 @@
 name: Release
 
-on:
-  repository_dispatch:
+on: push
+#   repository_dispatch:
 #   push:
 #     tags:
 #       - v* #当有v开头的tag push时触发event
