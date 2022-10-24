@@ -27,8 +27,7 @@ jobs:
     - name: list_command
       run: |
         ls ${{github.workspace}}
-        sudo apt-get update
-        sudo apt-get install liblog
+        sudo apt-get install android-liblog
         sudo apt-get install libunwind
         ls /usr/lib
         ls /usr/local/lib
