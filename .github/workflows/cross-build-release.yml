@@ -72,8 +72,8 @@ jobs:
     - name: Install Rust
       run: |
         rustup install ${{ matrix.rust }}
-        rustup target add ${{ matrix.target }}
         rustup default nightly
+        rustup target add ${{ matrix.target }}
         rustup show
     - name: Install libusb
       run: | 
