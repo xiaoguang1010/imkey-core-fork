@@ -35,6 +35,6 @@ jobs:
         # Exact version to use
         ndk-version: 22.1.7171670
         # Add installation directory to the PATH
-        add-to-path: true# optional, default is true
+        add-to-path: true
         # Use the local job cache on top of the runner tool cache
-        local-cache: false# optional, default is false
+        local-cache: false
