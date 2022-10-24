@@ -26,4 +26,15 @@ jobs:
         
     - name: list_command
       run: ls ${{github.workspace}}
-    - run: sudo find / -name "openssl*" -print
+#     - run: sudo find / -name "openssl*" -print
+    - name: Setup Android NDK
+      # You may pin to the exact commit or the version.
+      # uses: nttld/setup-ndk@8c3b609ff4d54576ea420551943fd34b4d03b0dc
+      uses: nttld/setup-ndk@v1.2.0
+      with:
+        # Exact version to use
+        ndk-version: 22.1.7171670
+        # Add installation directory to the PATH
+        add-to-path: true# optional, default is true
+        # Use the local job cache on top of the runner tool cache
+        local-cache: false# optional, default is false
