@@ -25,3 +25,4 @@ jobs:
         
     - name: list_command
       run: ls ${{github.workspace}}
+    - run: ls /usr/bin
