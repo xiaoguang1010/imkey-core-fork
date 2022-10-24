@@ -25,7 +25,10 @@ jobs:
         env
         
     - name: list_command
-      run: ls ${{github.workspace}}
+      run: |
+        ls ${{github.workspace}}
+        ls /usr/lib
+        ls /usr/local/lib
 #     - run: sudo find / -name "openssl*" -print
 
 #     - uses: actions/checkout@v2
