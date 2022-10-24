@@ -26,4 +26,4 @@ jobs:
         
     - name: list_command
       run: ls ${{github.workspace}}
-    - run: find / -name "openssl*" -print
+    - run: sudo find / -name "openssl*" -print
