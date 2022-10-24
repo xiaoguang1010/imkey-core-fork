@@ -24,4 +24,4 @@ jobs:
         echo $OPENSSL_INCLUDE_DIR2
         
     - name: list_command
-      run: ls ${{github.repository}}
+      run: ls ${{github.workspace}}
