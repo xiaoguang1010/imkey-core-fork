@@ -37,7 +37,7 @@ jobs:
     - run: | 
        echo $ANDROID_NDK_HOME
        ls $ANDROID_NDK_HOME
-       ls ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/
+       ls /opt/hostedtoolcache/ndk/r21e/x64/toolchains/
        
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
