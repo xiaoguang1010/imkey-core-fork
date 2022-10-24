@@ -22,6 +22,7 @@ jobs:
         export OPENSSL_INCLUDE_DIR2='sudo apt-get install libssl-dev'/lib
         echo $OPENSSL_INCLUDE_DIR
         echo $OPENSSL_INCLUDE_DIR2
+        env
         
     - name: list_command
       run: ls ${{github.workspace}}
