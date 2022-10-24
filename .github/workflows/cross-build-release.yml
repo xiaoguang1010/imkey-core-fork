@@ -10,6 +10,9 @@ env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
   OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/lib
   OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/include
+  AR: /opt/hostedtoolcache/ndk/r21e/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+  CC: /opt/hostedtoolcache/ndk/r21e/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+  LD: /opt/hostedtoolcache/ndk/r21e/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
   
 
 jobs:
