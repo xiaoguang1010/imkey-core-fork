@@ -73,6 +73,7 @@ jobs:
       run: |
         rustup install ${{ matrix.rust }}
         rustup target add ${{ matrix.target }}
+        rustup default nightly
         rustup show
     - name: Install libusb
       run: | 
