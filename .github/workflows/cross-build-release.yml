@@ -84,8 +84,12 @@ jobs:
 
     - name: Build
       run: | 
-        AR=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-        CC=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-        LD=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+        AR=/opt/hostedtoolcache/ndk/r21e/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+        echo aaaa
+        CC=/opt/hostedtoolcache/ndk/r21e/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+        echo bbbb
+        LD=/opt/hostedtoolcache/ndk/r21e/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+        echo cccc
         env OPENSSL_STATIC=1
+        echo dddd
         cargo build --release --target ${{ matrix.target }}
