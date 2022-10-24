@@ -18,11 +18,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install opssl
       run: |
-        export OPENSSL_INCLUDE_DIR='sudo apt-get install openssl'
-        export OPENSSL_INCLUDE_DIR2='sudo apt-get install libssl-dev'
+        export OPENSSL_INCLUDE_DIR='sudo apt-get install openssl'/include
+        export OPENSSL_INCLUDE_DIR2='sudo apt-get install libssl-dev'/lib
         echo $OPENSSL_INCLUDE_DIR
         echo $OPENSSL_INCLUDE_DIR2
         
     - name: list_command
       run: ls ${{github.workspace}}
-    - run: ls /usr/bin/apt-get/
+#     - run: ls /usr/bin/apt-get/
