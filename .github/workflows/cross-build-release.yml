@@ -78,7 +78,9 @@ jobs:
     - name: Install libusb
       run: | 
         sudo apt-get install libusb-dev
-        sudo apt-get install libusb-1.0-0-dev 
+        sudo apt-get install libusb-1.0-0-dev
+        sudo apt-get install android-liblog
+        sudo apt-get install libunwind-dev
     - name: Android NDK set
       uses: nttld/setup-ndk@v1
       id: setup-ndk
