@@ -80,7 +80,7 @@ jobs:
       id: setup-ndk
       with:
         ndk-version: r21e
-        add-to-path: false
+        add-to-path: true
 
     - name: Build
       run: | 
