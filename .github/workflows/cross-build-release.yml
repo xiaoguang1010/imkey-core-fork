@@ -8,6 +8,9 @@ on: push
 
 env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
+  OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/lib
+  OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/include
+  
 
 jobs:
 
@@ -17,30 +20,30 @@ jobs:
     strategy:
       matrix:
         include:
-        - build: x86
-          os: ubuntu-latest
-          rust: stable
-          target: i686-linux-android
-          linker: i686-linux-android29-clang
-          cross: true
+#         - build: x86
+#           os: ubuntu-latest
+#           rust: stable
+#           target: i686-linux-android
+#           linker: i686-linux-android29-clang
+#           cross: true
         - build: x86_64
           os: ubuntu-latest
           rust: stable
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
           cross: true
-        - build: arm-v7
-          os: ubuntu-latest
-          rust: stable
-          target: armv7-linux-androideabi
-          linker: armv7a-linux-androideabi29-clang
-          cross: true
-        - build: aarch64
-          os: ubuntu-latest
-          rust: stable
-          target: aarch64-linux-android
-          linker: aarch64-linux-android29-clang
-          cross: true
+#         - build: arm-v7
+#           os: ubuntu-latest
+#           rust: stable
+#           target: armv7-linux-androideabi
+#           linker: armv7a-linux-androideabi29-clang
+#           cross: true
+#         - build: aarch64
+#           os: ubuntu-latest
+#           rust: stable
+#           target: aarch64-linux-android
+#           linker: aarch64-linux-android29-clang
+#           cross: true
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -57,11 +60,11 @@ jobs:
           target
         key: ${{ runner.os }}-${{ matrix.rust }}
 
-    - name: Install Linker
-      if: matrix.cross
-      run: |
-        sudo apt-get update
-        sudo apt-get install ${{ matrix.linker }}
+#     - name: Install Linker
+#       if: matrix.cross
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install ${{ matrix.linker }}
 
     - name: Install Rust
       run: |
@@ -72,6 +75,16 @@ jobs:
       run: | 
         sudo apt-get install libusb-dev
         sudo apt-get install libusb-1.0-0-dev 
+    - name: Android NDK set
+      uses: nttld/setup-ndk@v1
+      id: setup-ndk
+      with:
+        ndk-version: r21e
+        add-to-path: false
 
     - name: Build
-      run: cargo build --release --target ${{ matrix.target }}
+    - run: AR=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+    - run: CC=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+    - run: LD=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+    - run: env OPENSSL_STATIC=1
+    - run: cargo build --release --target ${{ matrix.target }}
