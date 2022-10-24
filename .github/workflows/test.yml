@@ -32,7 +32,7 @@ jobs:
     - uses: nttld/setup-ndk@v1
       id: setup-ndk
       with:
-        ndk-version: 22
+        ndk-version: r22e
         add-to-path: false
     - run: echo $ANDROID_NDK_HOME
       env:
