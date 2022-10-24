@@ -27,8 +27,8 @@ jobs:
     - name: list_command
       run: |
         ls ${{github.workspace}}
-        sudo apt-get install liblog-dev
-        sudo apt-get install libunwind-dev
+        sudo apt-get install liblog
+        sudo apt-get install libunwind
         ls /usr/lib
         ls /usr/local/lib
 #     - run: sudo find / -name "openssl*" -print
