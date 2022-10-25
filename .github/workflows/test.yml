@@ -40,9 +40,9 @@ jobs:
       uses: android-actions/setup-android@v2
     
     - run: | 
-       echo $ANDROID_NDK_HOME
-       ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/
-       echo AAAAA
-       ls /opt/
-      env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+          ls /opt/
+#       echo $ANDROID_NDK_HOME
+#       ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/
+#       echo AAAAA
+#      env:
+#        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
