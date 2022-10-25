@@ -10,9 +10,11 @@ env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
   OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/lib
   OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/include
-  AR: $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-  CC: $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-  LD: $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld 
+  AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+  CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+  LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+  ANDROID_NDK_TOOLCHAINS: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin
+  
 
 jobs:
 
@@ -30,7 +32,7 @@ jobs:
 #           cross: true
         - build: x86_64
           os: ubuntu-latest
-          rust: stable
+          rust: nightly
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
           cross: true
@@ -59,7 +61,7 @@ jobs:
           ~/.cargo/registry
           ~/.cargo/git
           ~/.rustup
-          target
+ #         target
         key: ${{ runner.os }}-${{ matrix.rust }}
 
 #     - name: Install Linker
@@ -74,14 +76,16 @@ jobs:
         rustup default nightly
         rustup target add ${{ matrix.target }}
         rustup show
-    - name: Install Depend Lib
+    - name: Install libusb
       run: | 
        sudo apt-get install libusb-dev
        sudo apt-get install libusb-1.0-0-dev
+       sudo apt-get install android-liblog
        sudo apt-get install libunwind-dev
+       sudo apt-get install libprotobuf-dev
        
-#     - name: Setup Android SDK
-#       uses: android-actions/setup-android@v2
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
        
     - name: Android NDK set
       uses: nttld/setup-ndk@v1
@@ -92,7 +96,11 @@ jobs:
 
     - name: Build
       run: | 
+        AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+        CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+        LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
         env OPENSSL_STATIC=1
         echo ${{ matrix.target }}
-        sudo ln -s $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
+        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
+        ls /usr/local/lib/
         cargo build --release --target ${{ matrix.target }}
