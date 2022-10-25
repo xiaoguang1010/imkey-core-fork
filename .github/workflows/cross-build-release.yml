@@ -99,3 +99,4 @@ jobs:
         sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
         ls /usr/local/lib/
         cargo build --release --target ${{ matrix.target }}
+        cargo clean
