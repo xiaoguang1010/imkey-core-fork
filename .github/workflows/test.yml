@@ -31,7 +31,7 @@ jobs:
         sudo apt-get install libunwind-dev
         ls /usr/bin/ld
         echo aaaaaaaaa
-        gcc -lhdf5 --verbose
+        gcc -llog --verbose
 #     - run: sudo find / -name "openssl*" -print
 
 #     - uses: actions/checkout@v2
