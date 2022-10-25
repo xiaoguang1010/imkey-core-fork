@@ -35,6 +35,9 @@ jobs:
           rust: nightly
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
+          ar: x86_64-linux-android-ar
+          cc: x86_64-linux-android29-clang
+          ld: x86_64-linux-android-ld
           cross: true
 #         - build: arm-v7
 #           os: ubuntu-latest
@@ -96,11 +99,14 @@ jobs:
 
     - name: Build
       run: | 
-        AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-        CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-        LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+        AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.ar }}
+        CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.cc }}
+        LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.ld }}
         env OPENSSL_STATIC=1
         echo ${{ matrix.target }}
+        echo ${{ matrix.ar }}
+        echo ${{ matrix.cc }}
+        echo ${{ matrix.ld }}
         sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
         ls /usr/local/lib/
         cargo build --release --target ${{ matrix.target }}
