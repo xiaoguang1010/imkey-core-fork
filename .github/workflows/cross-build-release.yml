@@ -13,6 +13,7 @@ env:
   AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
   CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
   LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+  ANDROID_NDK_TOOLCHAINS: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin
   
 
 jobs:
