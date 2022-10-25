@@ -24,12 +24,15 @@ jobs:
     strategy:
       matrix:
         include:
-#         - build: x86
-#           os: ubuntu-latest
-#           rust: stable
-#           target: i686-linux-android
-#           linker: i686-linux-android29-clang
-#           cross: true
+        - build: x86
+          os: ubuntu-latest
+          rust: stable
+          target: i686-linux-android
+          linker: i686-linux-android29-clang
+          ar: i686-linux-android-ar
+          cc: i686-linux-android29-clang
+          ld: i686-linux-android-ld
+          cross: true
         - build: x86_64
           os: ubuntu-latest
           rust: nightly
@@ -87,8 +90,8 @@ jobs:
        sudo apt-get install libunwind-dev
        sudo apt-get install libprotobuf-dev
        
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+#     - name: Setup Android SDK
+#       uses: android-actions/setup-android@v2
        
     - name: Android NDK set
       uses: nttld/setup-ndk@v1
@@ -108,5 +111,4 @@ jobs:
         echo ${{ matrix.cc }}
         echo ${{ matrix.ld }}
         sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
-        ls /usr/local/lib/
         cargo build --release --target ${{ matrix.target }}
