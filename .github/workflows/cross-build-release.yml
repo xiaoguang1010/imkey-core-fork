@@ -31,7 +31,7 @@ jobs:
 #           cross: true
         - build: x86_64
           os: ubuntu-latest
-          rust: 1.65.0
+          rust: 1.65
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
           cross: true
