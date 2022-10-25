@@ -29,7 +29,6 @@ jobs:
         ls ${{github.workspace}}
         sudo apt-get install android-liblog
         sudo apt-get install libunwind-dev
-#       ls /usr/bin
         ls /usr/bin/ld
 #     - run: sudo find / -name "openssl*" -print
 
