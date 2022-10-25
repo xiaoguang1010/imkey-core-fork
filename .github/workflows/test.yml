@@ -31,6 +31,7 @@ jobs:
         sudo apt-get install libunwind-dev
         ls /usr/bin/ld
         echo aaaaaaaaa
+        sudo apt-get install locate
         locate liblog
 #       sudo apt-get install liblog-dev
 #     - run: sudo find / -name "openssl*" -print
