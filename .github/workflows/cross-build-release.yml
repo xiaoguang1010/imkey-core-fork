@@ -33,15 +33,15 @@ jobs:
           cc: i686-linux-android29-clang
           ld: i686-linux-android-ld
           cross: true
-        - build: x86_64
-          os: ubuntu-latest
-          rust: nightly
-          target: x86_64-linux-android
-          linker: x86_64-linux-android29-clang
-          ar: x86_64-linux-android-ar
-          cc: x86_64-linux-android29-clang
-          ld: x86_64-linux-android-ld
-          cross: true
+#         - build: x86_64
+#           os: ubuntu-latest
+#           rust: nightly
+#           target: x86_64-linux-android
+#           linker: x86_64-linux-android29-clang
+#           ar: x86_64-linux-android-ar
+#           cc: x86_64-linux-android29-clang
+#           ld: x86_64-linux-android-ld
+#           cross: true
 #         - build: arm-v7
 #           os: ubuntu-latest
 #           rust: stable
@@ -110,5 +110,5 @@ jobs:
         echo ${{ matrix.ar }}
         echo ${{ matrix.cc }}
         echo ${{ matrix.ld }}
-        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
+        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/${{ matrix.target }}/30/liblog.so /usr/local/lib/liblog.so
         cargo build --release --target ${{ matrix.target }}
