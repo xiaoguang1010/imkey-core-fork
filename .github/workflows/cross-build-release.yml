@@ -22,12 +22,12 @@ jobs:
     strategy:
       matrix:
         include:
-        - build: x86
-          os: ubuntu-latest
-          rust: stable
-          target: i686-linux-android
-          linker: i686-linux-android29-clang
-          cross: true
+#         - build: x86
+#           os: ubuntu-latest
+#           rust: stable
+#           target: i686-linux-android
+#           linker: i686-linux-android29-clang
+#           cross: true
         - build: x86_64
           os: ubuntu-latest
           rust: stable
