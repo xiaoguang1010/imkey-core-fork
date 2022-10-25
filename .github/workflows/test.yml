@@ -54,6 +54,6 @@ jobs:
           echo DDDDD
           ls /usr/local/lib/android/
           echo EEEEE
-          ls /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/
+          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
