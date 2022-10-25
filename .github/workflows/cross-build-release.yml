@@ -10,9 +10,9 @@ env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
   OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/lib
   OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/include
-  AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-  CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-  LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld 
+  AR: $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+  CC: $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+  LD: $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld 
 
 jobs:
 
@@ -94,5 +94,5 @@ jobs:
       run: | 
         env OPENSSL_STATIC=1
         echo ${{ matrix.target }}
-        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
+        sudo ln -s $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
         cargo build --release --target ${{ matrix.target }}
