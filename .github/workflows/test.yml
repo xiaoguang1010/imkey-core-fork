@@ -29,23 +29,20 @@ jobs:
         ls ${{github.workspace}}
         sudo apt-get install android-liblog
         sudo apt-get install libunwind-dev
-        ls /usr/bin/ld
-        echo aaaaaaaaa
-        sudo apt-get install locate
-        sudo apt-get install libprotobuf-dev
-        ls /usr/lib/
-#       sudo apt-get install liblog-dev
-#     - run: sudo find / -name "openssl*" -print
 
-#     - uses: actions/checkout@v2
-    - uses: nttld/setup-ndk@v1
-      id: setup-ndk
-      with:
-        ndk-version: r23
-        add-to-path: true
+#     - uses: nttld/setup-ndk@v1
+#       id: setup-ndk
+#       with:
+#         ndk-version: r23
+#         add-to-path: true
+      
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+    
     - run: | 
        echo $ANDROID_NDK_HOME
        ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/
-       
+       echo AAAAA
+       ls /opt/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
