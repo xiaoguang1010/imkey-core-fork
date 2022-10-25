@@ -30,6 +30,7 @@ jobs:
         sudo apt-get install android-liblog
         sudo apt-get install libunwind-dev
         ls /usr/bin/ld
+        sudo apt-get install liblog
 #     - run: sudo find / -name "openssl*" -print
 
 #     - uses: actions/checkout@v2
