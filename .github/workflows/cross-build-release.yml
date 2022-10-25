@@ -30,7 +30,7 @@ jobs:
 #           linker: i686-linux-android29-clang
 #           cross: true
         - build: x86_64
-          os: ubuntu-latest
+          os: macos-latest
           rust: stable
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
@@ -79,8 +79,8 @@ jobs:
       run: | 
         sudo apt-get install libusb-dev
         sudo apt-get install libusb-1.0-0-dev
-        sudo apt-get install android-liblog
-        sudo apt-get install libunwind-dev
+#        sudo apt-get install android-liblog
+#        sudo apt-get install libunwind-dev
     - name: Android NDK set
       uses: nttld/setup-ndk@v1
       id: setup-ndk
