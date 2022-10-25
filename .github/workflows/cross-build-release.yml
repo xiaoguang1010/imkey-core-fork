@@ -78,6 +78,7 @@ jobs:
     - name: Install libusb
       run: | 
          brew install libusb
+         brew install openssl
 #        sudo apt-get install libusb-dev
 #        sudo apt-get install libusb-1.0-0-dev
 #        sudo apt-get install android-liblog
