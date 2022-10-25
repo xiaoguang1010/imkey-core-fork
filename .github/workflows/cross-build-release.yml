@@ -22,15 +22,15 @@ jobs:
     strategy:
       matrix:
         include:
-#         - build: x86
-#           os: ubuntu-latest
-#           rust: stable
-#           target: i686-linux-android
-#           linker: i686-linux-android29-clang
-#           cross: true
+        - build: x86
+          os: ubuntu-latest
+          rust: stable
+          target: i686-linux-android
+          linker: i686-linux-android29-clang
+          cross: true
         - build: x86_64
           os: ubuntu-latest
-          rust: nightly
+          rust: stable
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
           cross: true
@@ -74,7 +74,7 @@ jobs:
         rustup default nightly
         rustup target add ${{ matrix.target }}
         rustup show
-    - name: Install libusb
+    - name: Install Depend Lib
       run: | 
        sudo apt-get install libusb-dev
        sudo apt-get install libusb-1.0-0-dev
