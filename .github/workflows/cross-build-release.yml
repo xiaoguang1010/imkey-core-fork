@@ -10,10 +10,10 @@ env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
   OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/lib
   OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/include
-  AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-  CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-  LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
-  ANDROID_NDK_TOOLCHAINS: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin
+#   AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+#   CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+#   LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+#   ANDROID_NDK_TOOLCHAINS: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin
   
 
 jobs:
@@ -80,12 +80,10 @@ jobs:
       run: | 
        sudo apt-get install libusb-dev
        sudo apt-get install libusb-1.0-0-dev
-       sudo apt-get install android-liblog
        sudo apt-get install libunwind-dev
-       sudo apt-get install libprotobuf-dev
        
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+#     - name: Setup Android SDK
+#       uses: android-actions/setup-android@v2
        
     - name: Android NDK set
       uses: nttld/setup-ndk@v1
