@@ -26,7 +26,7 @@ jobs:
         include:
         - build: x86
           os: ubuntu-latest
-          rust: stable
+          rust: nightly
           target: i686-linux-android
           linker: i686-linux-android29-clang
           ar: i686-linux-android-ar
