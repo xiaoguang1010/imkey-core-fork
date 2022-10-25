@@ -81,6 +81,7 @@ jobs:
        sudo apt-get install libusb-1.0-0-dev
        sudo apt-get install android-liblog
        sudo apt-get install libunwind-dev
+       sudo apt-get install libprotobuf-dev
     - name: Android NDK set
       uses: nttld/setup-ndk@v1
       id: setup-ndk
@@ -91,12 +92,8 @@ jobs:
     - name: Build
       run: | 
         AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-        echo aaaa
         CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-        echo bbbb
         LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
-        echo cccc
         env OPENSSL_STATIC=1
-        echo dddd
         echo ${{ matrix.target }}
         cargo build --release --target ${{ matrix.target }}
