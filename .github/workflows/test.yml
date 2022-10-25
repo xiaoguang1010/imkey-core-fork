@@ -51,5 +51,7 @@ jobs:
           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/
           echo DDDDD
           ls /usr/local/lib
+          echo DDDDD
+          ls /usr/local/lib/android/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
