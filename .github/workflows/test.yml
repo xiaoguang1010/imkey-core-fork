@@ -31,7 +31,8 @@ jobs:
         sudo apt-get install libunwind-dev
         ls /usr/bin/ld
         echo aaaaaaaaa
-        sudo apt-get install liblog-dev
+        locate liblog
+#       sudo apt-get install liblog-dev
 #     - run: sudo find / -name "openssl*" -print
 
 #     - uses: actions/checkout@v2
