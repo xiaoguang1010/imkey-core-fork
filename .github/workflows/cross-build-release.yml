@@ -86,7 +86,7 @@ jobs:
       uses: nttld/setup-ndk@v1
       id: setup-ndk
       with:
-        ndk-version: r22b
+        ndk-version: r23
         add-to-path: true
 
     - name: Build
