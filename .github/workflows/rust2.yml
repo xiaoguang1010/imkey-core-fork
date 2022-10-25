@@ -1,4 +1,4 @@
-name: Release
+name: Rust2
 
 on:
   push:
@@ -10,7 +10,9 @@ env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
   OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/lib
   OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/include
-  
+  AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+  CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+  LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld 
 
 jobs:
 
@@ -28,7 +30,7 @@ jobs:
 #           cross: true
         - build: x86_64
           os: ubuntu-latest
-          rust: stable
+          rust: nightly
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
           cross: true
@@ -69,22 +71,28 @@ jobs:
     - name: Install Rust
       run: |
         rustup install ${{ matrix.rust }}
+        rustup default nightly
         rustup target add ${{ matrix.target }}
         rustup show
     - name: Install libusb
       run: | 
-        sudo apt-get install libusb-dev
-        sudo apt-get install libusb-1.0-0-dev 
+       sudo apt-get install libusb-dev
+       sudo apt-get install libusb-1.0-0-dev
+       sudo apt-get install libunwind-dev
+       
+#     - name: Setup Android SDK
+#       uses: android-actions/setup-android@v2
+       
     - name: Android NDK set
       uses: nttld/setup-ndk@v1
       id: setup-ndk
       with:
-        ndk-version: r21e
-        add-to-path: false
+        ndk-version: r22b
+        add-to-path: true
 
     - name: Build
-    - run: AR=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-    - run: CC=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-    - run: LD=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
-    - run: env OPENSSL_STATIC=1
-    - run: cargo build --release --target ${{ matrix.target }}
+      run: | 
+        env OPENSSL_STATIC=1
+        echo ${{ matrix.target }}
+        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/liblog.so /usr/local/lib/liblog.so
+        cargo build --release --target ${{ matrix.target }}
