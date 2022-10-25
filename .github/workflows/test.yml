@@ -40,8 +40,8 @@ jobs:
     - uses: nttld/setup-ndk@v1
       id: setup-ndk
       with:
-        ndk-version: r22b
-        add-to-path: false
+        ndk-version: r23
+        add-to-path: true
     - run: | 
        echo $ANDROID_NDK_HOME
        ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/
