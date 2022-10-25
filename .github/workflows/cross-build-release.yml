@@ -77,8 +77,9 @@ jobs:
         rustup show
     - name: Install libusb
       run: | 
-        sudo apt-get install libusb-dev
-        sudo apt-get install libusb-1.0-0-dev
+         sudo brew install libusb
+#        sudo apt-get install libusb-dev
+#        sudo apt-get install libusb-1.0-0-dev
 #        sudo apt-get install android-liblog
 #        sudo apt-get install libunwind-dev
     - name: Android NDK set
