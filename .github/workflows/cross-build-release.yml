@@ -10,9 +10,9 @@ env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
   OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/lib
   OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86_64/include
-  AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-  CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-  LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+  AR: /opt/hostedtoolcache/ndk/r23/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+  CC: /opt/hostedtoolcache/ndk/r23/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+  LD: /opt/hostedtoolcache/ndk/r23/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
   
 
 jobs:
@@ -91,9 +91,9 @@ jobs:
 
     - name: Build
       run: | 
-        AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
-        CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
-        LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
+        AR=/opt/hostedtoolcache/ndk/r23/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+        CC=/opt/hostedtoolcache/ndk/r23/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang
+        LD=/opt/hostedtoolcache/ndk/r23/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ld
         env OPENSSL_STATIC=1
         echo ${{ matrix.target }}
         cargo build --release --target ${{ matrix.target }}
