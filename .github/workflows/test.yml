@@ -33,6 +33,7 @@ jobs:
         echo aaaaaaaaa
         sudo apt-get install locate
         sudo apt-get install libprotobuf-dev
+        ls /usr/lib/
 #       sudo apt-get install liblog-dev
 #     - run: sudo find / -name "openssl*" -print
 
