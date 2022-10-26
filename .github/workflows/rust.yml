@@ -1,4 +1,4 @@
-name: Rust
+name: x86
 
 on:
   push:
@@ -8,19 +8,106 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-x86/lib
+  OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-x86/include
+  AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android-ar
+  CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android29-clang
+  LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android-ld
+  ANDROID_NDK_TOOLCHAINS: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin
+  
 
 jobs:
-  build:
 
-    runs-on: ubuntu-latest
-
+  publish-to-github:
+    name: Publish to Github
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        include:
+        - build: x86
+          os: ubuntu-latest
+          rust: nightly
+          target: i686-linux-android
+          linker: i686-linux-android30-clang
+          ar: i686-linux-android-ar
+          cc: i686-linux-android30-clang
+          ld: i686-linux-android-ld
+          cross: true
+#         - build: x86_64
+#           os: ubuntu-latest
+#           rust: nightly
+#           target: x86_64-linux-android
+#           linker: x86_64-linux-android29-clang
+#           ar: x86_64-linux-android-ar
+#           cc: x86_64-linux-android29-clang
+#           ld: x86_64-linux-android-ld
+#           cross: true
+#         - build: arm-v7
+#           os: ubuntu-latest
+#           rust: stable
+#           target: armv7-linux-androideabi
+#           linker: armv7a-linux-androideabi29-clang
+#           cross: true
+#         - build: aarch64
+#           os: ubuntu-latest
+#           rust: stable
+#           target: aarch64-linux-android
+#           linker: aarch64-linux-android29-clang
+#           cross: true
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
+    - name: Cache #缓存依赖关系和输出已改善执行时间
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          ~/.rustup
+ #         target
+        key: ${{ runner.os }}-${{ matrix.rust }}
+
+#     - name: Install Linker
+#       if: matrix.cross
+#       run: |
+#         sudo apt-get update
+#         sudo apt-get install ${{ matrix.linker }}
+
+    - name: Install Rust
+      run: |
+        rustup install ${{ matrix.rust }}
+        rustup default nightly
+        rustup target add ${{ matrix.target }}
+        rustup show
     - name: Install libusb
-      run: sudo apt-get install libusb-dev
-    - run: sudo apt-get install libusb-1.0-0-dev
+      run: | 
+       sudo apt-get install libusb-dev
+       sudo apt-get install libusb-1.0-0-dev
+       sudo apt-get install libunwind-dev
+       sudo apt-get install libprotobuf-dev
+       
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+       
+    - name: Android NDK set
+      uses: nttld/setup-ndk@v1
+      id: setup-ndk
+      with:
+        ndk-version: r22b
+        add-to-path: true
+
     - name: Build
-      run: cargo build --verbose
-    - name: Result
-      run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-    - run: echo "🐧 This job is now running on a ${{ github.actor }} server hosted by GitHub!"  
+      run: | 
+        AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android-ar
+        CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android30-clang
+        LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/i686-linux-android-ld
+        env OPENSSL_STATIC=1
+        echo ${{ matrix.target }}
+        echo ${{ matrix.ar }}
+        echo ${{ matrix.cc }}
+        echo ${{ matrix.ld }}
+        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/30/liblog.so /usr/local/lib/liblog.so
+        cargo build --release --target ${{ matrix.target }}
