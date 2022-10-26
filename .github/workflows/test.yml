@@ -18,10 +18,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install opssl
       run: |
-        export OPENSSL_INCLUDE_DIR='sudo apt-get install openssl'/include
-        export OPENSSL_INCLUDE_DIR2='sudo apt-get install libssl-dev'/lib
+        sudo apt-get install openssl
+        sudo apt-get install libssl-dev
         echo $OPENSSL_INCLUDE_DIR
         echo $OPENSSL_INCLUDE_DIR2
+        ls /usr/local/
         env
         
     - name: list_command
@@ -30,40 +31,40 @@ jobs:
         sudo apt-get install android-liblog
         sudo apt-get install libunwind-dev
 
-    - uses: nttld/setup-ndk@v1
-      id: setup-ndk
-      with:
-        ndk-version: r22b
-        add-to-path: true
+#     - uses: nttld/setup-ndk@v1
+#       id: setup-ndk
+#       with:
+#         ndk-version: r22b
+#         add-to-path: true
       
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+#     - name: Setup Android SDK
+#       uses: android-actions/setup-android@v2
     
-    - run: | 
-          ls /opt/
-          echo $ANDROID_NDK_HOME
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/
-          echo AAAAA
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/
-          echo BBBBB
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/
-          echo CCCCC
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/
-          echo 222222
-          ls /usr/local/
-          echo DDDDD
-          ls /usr/local/lib
-          echo DDDDD
-          ls /usr/local/lib/android/
-          echo 1111
-          ls /usr/local/lib/android/sdk/
-          echo EEEEE
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/
-          echo FFFFF
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/
-          echo GGGGG
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/
-          echo HHHHHH
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/30/
-      env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+#     - run: | 
+#           ls /opt/
+#           echo $ANDROID_NDK_HOME
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/
+#           echo AAAAA
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/
+#           echo BBBBB
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/
+#           echo CCCCC
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/
+#           echo 222222
+#           ls /usr/local/
+#           echo DDDDD
+#           ls /usr/local/lib
+#           echo DDDDD
+#           ls /usr/local/lib/android/
+#           echo 1111
+#           ls /usr/local/lib/android/sdk/
+#           echo EEEEE
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/
+#           echo FFFFF
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/
+#           echo GGGGG
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/
+#           echo HHHHHH
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/30/
+#       env:
+#         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
