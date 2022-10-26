@@ -33,7 +33,7 @@ jobs:
     - uses: nttld/setup-ndk@v1
       id: setup-ndk
       with:
-        ndk-version: r23
+        ndk-version: r22b
         add-to-path: true
       
     - name: Setup Android SDK
