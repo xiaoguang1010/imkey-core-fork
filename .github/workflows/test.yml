@@ -18,18 +18,19 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install opssl
       run: |
-        sudo apt-get install openssl
-        sudo apt-get install libssl-dev
-        echo $OPENSSL_INCLUDE_DIR
-        echo $OPENSSL_INCLUDE_DIR2
-        ls /usr/local/
-        env
+        openssl version
+#        sudo apt-get install openssl
+#        sudo apt-get install libssl-dev
+#        echo $OPENSSL_INCLUDE_DIR
+#        echo $OPENSSL_INCLUDE_DIR2
+#        ls /usr/local/
+#        env
         
-    - name: list_command
-      run: |
-        ls ${{github.workspace}}
-        sudo apt-get install android-liblog
-        sudo apt-get install libunwind-dev
+#     - name: list_command
+#       run: |
+#         ls ${{github.workspace}}
+#         sudo apt-get install android-liblog
+#         sudo apt-get install libunwind-dev
 
 #     - uses: nttld/setup-ndk@v1
 #       id: setup-ndk
