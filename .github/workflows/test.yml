@@ -53,6 +53,8 @@ jobs:
           ls /usr/local/lib
           echo DDDDD
           ls /usr/local/lib/android/
+          echo 1111
+          ls /usr/local/lib/android/sdk/
           echo EEEEE
           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/
           echo FFFFF
