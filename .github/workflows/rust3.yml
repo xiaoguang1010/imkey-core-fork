@@ -8,14 +8,14 @@ on:
 
 env:
   CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
-  OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-arm64/lib
-  OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-arm64/include
+#   OPENSSL_LIB_DIR: ${{github.workspace}}/depend/openssl/android-arm64/lib
+#   OPENSSL_INCLUDE_DIR: ${{github.workspace}}/depend/openssl/android-arm64/include
   AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ar
   CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang
   LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ld
   ANDROID_NDK_TOOLCHAINS: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin
   
-
+  
 jobs:
 
   publish-to-github:
@@ -24,30 +24,46 @@ jobs:
     strategy:
       matrix:
         include:
-#         - build: x86
-#           os: ubuntu-latest
-#           rust: stable
-#           target: i686-linux-android
-#           linker: i686-linux-android29-clang
-#           cross: true
-#         - build: x86_64
-#           os: ubuntu-latest
-#           rust: nightly
-#           target: x86_64-linux-android
-#           linker: x86_64-linux-android29-clang
-#           cross: true
+        - build: x86
+          os: ubuntu-latest
+          rust: nightly
+          target: i686-linux-android
+          linker: i686-linux-android29-clang
+          ar: i686-linux-android-ar
+          cc: i686-linux-android29-clang
+          ld: i686-linux-android-ld
+          openssl: android-x86
+          cross: true
+        - build: x86_64
+          os: ubuntu-latest
+          rust: nightly
+          target: x86_64-linux-android
+          linker: x86_64-linux-android29-clang
+          ar: x86_64-linux-android-ar
+          cc: x86_64-linux-android29-clang
+          ld: x86_64-linux-android-ld
+          openssl: android-x86_64
+          cross: true
         - build: arm-v7
           os: ubuntu-latest
-          rust: stable
+          rust: nightly
           target: armv7-linux-androideabi
           linker: armv7a-linux-androideabi29-clang
+          ar: arm-linux-androideabi-ar
+          cc: armv7a-linux-androideabi29-clang
+          ld: arm-linux-androideabi-ld
+          openssl: android-arm
           cross: true
-#         - build: aarch64
-#           os: ubuntu-latest
-#           rust: stable
-#           target: aarch64-linux-android
-#           linker: aarch64-linux-android29-clang
-#           cross: true
+        - build: aarch64
+          os: ubuntu-latest
+          rust: nightly
+          target: aarch64-linux-android
+          linker: aarch64-linux-android29-clang
+          ar: aarch64-linux-android-ar
+          cc: aarch64-linux-android29-clang
+          ld: aarch64-linux-android-ld
+          openssl: android-arm64
+          cross: true
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -96,11 +112,17 @@ jobs:
 
     - name: Build
       run: | 
-        AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ar
-        CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang
-        LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ld
+        echo ${{ matrix.openssl }}
+        export OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
+        export OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
+        echo ${{ matrix.ar }}
+        echo ${{ matrix.cc }}
+        echo ${{ matrix.ld }}
+        AR=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.ar }}
+        CC=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.cc }}
+        LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.ld }}
         env OPENSSL_STATIC=1
         echo ${{ matrix.target }}
-        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/29/liblog.so /usr/local/lib/liblog.so
+        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/${{ matrix.target }}/29/liblog.so /usr/local/lib/liblog.so
         ls /usr/local/lib/
         cargo build --release --target ${{ matrix.target }}
