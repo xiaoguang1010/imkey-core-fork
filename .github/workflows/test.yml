@@ -49,6 +49,8 @@ jobs:
           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/
           echo CCCCC
           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/30/
+          echo 222222
+          ls /usr/local/
           echo DDDDD
           ls /usr/local/lib
           echo DDDDD
