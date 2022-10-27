@@ -57,17 +57,17 @@ jobs:
 #           openssl: android-arm
 #           loglib: armv7-linux-androideabi
 #           cross: true
-        - build: aarch64
-          os: ubuntu-latest
-          rust: nightly
-          target: aarch64-linux-android
-          linker: aarch64-linux-android29-clang
-          ar: aarch64-linux-android-ar
-          cc: aarch64-linux-android29-clang
-          ld: aarch64-linux-android-ld
-          openssl: android-arm64
-          loglib: aarch64-linux-android
-          cross: true
+#         - build: aarch64
+#           os: ubuntu-latest
+#           rust: nightly
+#           target: aarch64-linux-android
+#           linker: aarch64-linux-android29-clang
+#           ar: aarch64-linux-android-ar
+#           cc: aarch64-linux-android29-clang
+#           ld: aarch64-linux-android-ld
+#           openssl: android-arm64
+#           loglib: aarch64-linux-android
+#           cross: true
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
