@@ -33,6 +33,7 @@ jobs:
           cc: i686-linux-android29-clang
           ld: i686-linux-android-ld
           openssl: android-x86_64
+          loglib: x86_64-linux-android
           cross: true
         - build: x86_64
           os: ubuntu-latest
@@ -43,6 +44,7 @@ jobs:
           cc: x86_64-linux-android29-clang
           ld: x86_64-linux-android-ld
           openssl: android-x86_64
+          loglib: x86_64-linux-android
           cross: true
         - build: arm-v7
           os: ubuntu-latest
@@ -53,6 +55,7 @@ jobs:
           cc: armv7a-linux-androideabi29-clang
           ld: arm-linux-androideabi-ld
           openssl: android-arm
+          loglib: armv7-linux-androideabi
           cross: true
         - build: aarch64
           os: ubuntu-latest
@@ -63,6 +66,7 @@ jobs:
           cc: aarch64-linux-android29-clang
           ld: aarch64-linux-android-ld
           openssl: android-arm64
+          loglib: aarch64-linux-android
           cross: true
     steps:
     - name: Checkout repository
@@ -123,6 +127,6 @@ jobs:
         LD=/opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.ld }}
         env OPENSSL_STATIC=1
         echo ${{ matrix.target }}
-        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/${{ matrix.target }}/29/liblog.so /usr/local/lib/liblog.so
+        sudo ln -s /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/${{ matrix.loglib }}/29/liblog.so /usr/local/lib/liblog.so
         ls /usr/local/lib/
         cargo build --release --target ${{ matrix.target }}
