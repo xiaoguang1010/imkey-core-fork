@@ -32,7 +32,7 @@ jobs:
           ar: i686-linux-android-ar
           cc: i686-linux-android29-clang
           ld: i686-linux-android-ld
-          openssl: android-x86
+          openssl: android-x86_64
           cross: true
         - build: x86_64
           os: ubuntu-latest
