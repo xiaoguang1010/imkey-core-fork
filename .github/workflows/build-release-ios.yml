@@ -39,6 +39,6 @@ jobs:
         rustup show
         cargo install cargo-lipo
 
-#     - name: Build
-#       run: | 
-        
+    - name: Build
+      run: | 
+        cargo lipo --release --targets aarch64-apple-ios x86_64-apple-ios
