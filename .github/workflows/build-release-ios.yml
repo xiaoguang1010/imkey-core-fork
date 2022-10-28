@@ -43,5 +43,29 @@ jobs:
       run: | 
         cargo lipo --release --targets aarch64-apple-ios x86_64-apple-ios
         ls
-        cbindgen src/lib.rs -l c > ${{github.workspace}}/target/connector.h
-        ls ${{github.workspace}}/target/
+        cbindgen ./api/src/lib.rs -l c > ${{github.workspace}}/target/connector.h
+        ls ./target/
+        
+        LIBS=./mobile-sdk/imKeyCoreX/imKeyCoreX
+        cp ./target/universal/release/libconnector.a $LIBS/libconnector.a
+        cp ./target/connector.h $LIBS/connector.h
+        if [ -d "./ios-release" ]; then
+          rm -rf ./ios-release/*
+        fi
+        
+        pushd ./mobile-sdk/imKeyCoreX
+        BUILD_DIR=./Products
+        BUILD_ROOT=./Products
+        SYMROOT=./Products
+        BUILD_PRODUCTS=./Products
+        CONFIGURATION=Release
+        PROJECT_NAME=imKeyCoreX
+        
+        mkdir -p $BUILD_DIR
+        UNIVERSAL_OUTPUTFOLDER=$BUILD_DIR/$CONFIGURATION-Universal
+        mkdir -p $UNIVERSAL_OUTPUTFOLDER
+        echo aaaaaaa
+        ls $UNIVERSAL_OUTPUTFOLDER
+        xcodebuild -target $PROJECT_NAME ONLY_ACTIVE_ARCH=NO -configuration $CONFIGURATION -sdk iphoneos BUILD_DIR=$BUILD_DIR BUILD_ROOT=$BUILD_ROOT build
+        
+        
