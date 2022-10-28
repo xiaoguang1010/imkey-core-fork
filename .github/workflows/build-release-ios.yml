@@ -7,7 +7,7 @@ on:
     branches: [ "develop" ]
 
 env:
-  CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
+  CARGO_TERM_COLOR: always
   
 jobs:
 
@@ -42,3 +42,6 @@ jobs:
     - name: Build
       run: | 
         cargo lipo --release --targets aarch64-apple-ios x86_64-apple-ios
+        ls
+        cbindgen src/lib.rs -l c > ${{github.workspace}}/target/connector.h
+        ls ${{github.workspace}}/target/
