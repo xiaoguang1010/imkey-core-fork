@@ -1,0 +1,43 @@
+name: Build Release IOS
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+env:
+  CARGO_TERM_COLOR: always #https://doc.rust-lang.org/cargo/reference/config.html#termcolor
+  
+jobs:
+
+  build:
+    name: build release
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
+    - name: Cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          ~/.rustup
+          target
+        key: macos-latest-nightly
+
+    - name: Install Rust
+      run: |
+        rustup install nightly
+        rustup target add aarch64-apple-ios x86_64-apple-ios
+        rustup show
+        cargo install cargo-lipo
+
+#     - name: Build
+#       run: | 
+        
