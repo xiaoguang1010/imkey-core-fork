@@ -42,9 +42,7 @@ jobs:
     - name: Build
       run: | 
         cargo lipo --release --targets aarch64-apple-ios x86_64-apple-ios
-        ls
         cbindgen ./api/src/lib.rs -l c > ${{github.workspace}}/target/connector.h
-        ls ./target/
         
         LIBS=./mobile-sdk/imKeyCoreX/imKeyCoreX
         cp ./target/universal/release/libconnector.a $LIBS/libconnector.a
@@ -64,8 +62,7 @@ jobs:
         mkdir -p $BUILD_DIR
         UNIVERSAL_OUTPUTFOLDER=$BUILD_DIR/$CONFIGURATION-Universal
         mkdir -p $UNIVERSAL_OUTPUTFOLDER
-        echo aaaaaaa
-        ls $UNIVERSAL_OUTPUTFOLDER
+ 
         xcodebuild -target $PROJECT_NAME ONLY_ACTIVE_ARCH=NO -configuration $CONFIGURATION -sdk iphoneos BUILD_DIR=$BUILD_DIR BUILD_ROOT=$BUILD_ROOT build
         xcodebuild -target $PROJECT_NAME -configuration Debug -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=$BUILD_DIR BUILD_ROOT=$BUILD_ROOT EXCLUDED_ARCHS=arm64 build
         
@@ -76,6 +73,4 @@ jobs:
         cp -R $UNIVERSAL_OUTPUTFOLDER/$PROJECT_NAME.framework ../../ios-release
         rm -rf $UNIVERSAL_OUTPUTFOLDER
         
-        echo bbbbbbb
-        ls ../../ios-release
         popd
