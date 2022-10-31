@@ -50,7 +50,7 @@ jobs:
         cp ./target/universal/release/libconnector.a $LIBS/libconnector.a
         cp ./target/connector.h $LIBS/connector.h
         if [ -d "./ios-release" ]; then
-          rm -rf ./ios-release/*
+          rm -rf ./ios-release
         fi
         
         pushd ./mobile-sdk/imKeyCoreX
@@ -67,6 +67,7 @@ jobs:
         echo aaaaaaa
         ls $UNIVERSAL_OUTPUTFOLDER
         xcodebuild -target $PROJECT_NAME ONLY_ACTIVE_ARCH=NO -configuration $CONFIGURATION -sdk iphoneos BUILD_DIR=$BUILD_DIR BUILD_ROOT=$BUILD_ROOT build
+        xcodebuild -target $PROJECT_NAME -configuration Debug -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=$BUILD_DIR BUILD_ROOT=$BUILD_ROOT EXCLUDED_ARCHS=arm64 build
         
         cp -R $BUILD_DIR/$CONFIGURATION-iphoneos/$PROJECT_NAME.framework $UNIVERSAL_OUTPUTFOLDER/
         
