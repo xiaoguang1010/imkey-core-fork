@@ -68,4 +68,13 @@ jobs:
         ls $UNIVERSAL_OUTPUTFOLDER
         xcodebuild -target $PROJECT_NAME ONLY_ACTIVE_ARCH=NO -configuration $CONFIGURATION -sdk iphoneos BUILD_DIR=$BUILD_DIR BUILD_ROOT=$BUILD_ROOT build
         
+        cp -R $BUILD_DIR/$CONFIGURATION-iphoneos/$PROJECT_NAME.framework $UNIVERSAL_OUTPUTFOLDER/
         
+        lipo -create -output $UNIVERSAL_OUTPUTFOLDER/$PROJECT_NAME.framework/$PROJECT_NAME $BUILD_PRODUCTS/Debug-iphonesimulator/$PROJECT_NAME.framework/$PROJECT_NAME $BUILD_DIR/$CONFIGURATION-iphoneos/$PROJECT_NAME.framework/$PROJECT_NAME
+        
+        cp -R $UNIVERSAL_OUTPUTFOLDER/$PROJECT_NAME.framework ../../ios-release
+        rm -rf $UNIVERSAL_OUTPUTFOLDER
+        
+        echo bbbbbbb
+        ls ../../ios-release
+        popd
