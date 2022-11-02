@@ -121,7 +121,7 @@ jobs:
         echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.cc }}"' >> /Users/runner/.cargo/config
         cat /Users/runner/.cargo/config
         ls /Users/runner/.cargo/
-        /Users/runner/hostedtoolcache/ndk/
+        ls /Users/runner/hostedtoolcache/ndk/
         
 
     - name: Build
