@@ -99,6 +99,7 @@ jobs:
         brew install openssl
         brew install openssl@1.1
         brew install pkg-config
+        xcode-select --install
         
 #     - name: Install libusb
 #       run: | 
