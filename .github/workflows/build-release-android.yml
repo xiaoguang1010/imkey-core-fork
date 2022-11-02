@@ -122,23 +122,24 @@ jobs:
         cat /Users/runner/.cargo/config
         ls /Users/runner/.cargo/
 
-#     - name: Build
-#       run: | 
-#         echo ${{ matrix.openssl }}
-#         export OPENSSL_LIB_ROOT_DIR=${{github.workspace}}/depend/openssl
-#         export OPENSSL_INCLUDE_ROOT_DIR=${{github.workspace}}/depend/openssl
-#         export OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
-#         export OPENSSL_DIR=${{github.workspace}}/depend/openssl
-#         export X86_64_LINUX_ANDROID_OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
-#         export OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
-#         export X86_64_LINUX_ANDROID_OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
-#         echo ${{ matrix.ar }}
-#         echo ${{ matrix.cc }}
-#         echo ${{ matrix.ld }}
-#         AR=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.ar }}
-#         CC=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.cc }}
-#         LD=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.ld }}
-#         echo $AR
-#         env OPENSSL_STATIC=1
-#         echo ${{ matrix.target }}
-#         cargo build --release --target ${{ matrix.target }}
+    - name: Build
+      run: | 
+        export PATH=$PATH:$ANDROID_NDK_TOOLCHAINS
+        echo ${{ matrix.openssl }}
+        export OPENSSL_LIB_ROOT_DIR=${{github.workspace}}/depend/openssl
+        export OPENSSL_INCLUDE_ROOT_DIR=${{github.workspace}}/depend/openssl
+        export OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
+        export OPENSSL_DIR=${{github.workspace}}/depend/openssl
+        export X86_64_LINUX_ANDROID_OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
+        export OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
+        export X86_64_LINUX_ANDROID_OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
+        echo ${{ matrix.ar }}
+        echo ${{ matrix.cc }}
+        echo ${{ matrix.ld }}
+        AR=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.ar }}
+        CC=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.cc }}
+        LD=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.ld }}
+        echo $AR
+        env OPENSSL_STATIC=1
+        echo ${{ matrix.target }}
+        cargo build --release --target ${{ matrix.target }}
