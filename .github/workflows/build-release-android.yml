@@ -98,6 +98,7 @@ jobs:
         rustup show
         brew install openssl
         brew install openssl@1.1
+        brew install pkg-config
         
 #     - name: Install libusb
 #       run: | 
