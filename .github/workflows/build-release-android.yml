@@ -115,10 +115,10 @@ jobs:
         
     - name: set config file
       run: |
-        echo '[target.${{ matrix.target }}]' >> config
-        echo 'ar=$ANDROID_NDK_TOOLCHAINS/${{ matrix.ar }}' >> config
-        echo 'linker=$ANDROID_NDK_TOOLCHAINS/${{ matrix.cc }}' >> config
-        cat config
+        echo '[target.${{ matrix.target }}]' >> /Users/runner/.cargo/config
+        echo 'ar=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.ar }}' >> /Users/runner/.cargo/config
+        echo 'linker=${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.cc }}' >> /Users/runner/.cargo/config
+        cat /Users/runner/.cargo/config
 
 #     - name: Build
 #       run: | 
