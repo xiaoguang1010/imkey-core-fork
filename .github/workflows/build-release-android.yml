@@ -120,11 +120,11 @@ jobs:
         echo 'ar="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.ar }}"' >> /Users/runner/.cargo/config
         echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.cc }}"' >> /Users/runner/.cargo/config
         cat /Users/runner/.cargo/config
+        source /Users/runner/.cargo/config
 
     - name: Build
       run: | 
         echo ${{ matrix.openssl }}
-        ls /opt/homebrew/opt/
         export OPENSSL_LIB_ROOT_DIR=${{github.workspace}}/depend/openssl
         export OPENSSL_INCLUDE_ROOT_DIR=${{github.workspace}}/depend/openssl
         export OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
