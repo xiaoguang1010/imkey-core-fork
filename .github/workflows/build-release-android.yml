@@ -13,7 +13,7 @@ env:
 #   AR: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ar
 #   CC: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi29-clang
 #   LD: /opt/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ld
-  ANDROID_NDK_TOOLCHAINS: /Users/runner/hostedtoolcache/ndk/r22b/x64/toolchains/llvm/prebuilt/darwin-x86_64/bin
+  ANDROID_NDK_TOOLCHAINS: /Users/runner/hostedtoolcache/ndk/r20b/x64/toolchains/llvm/prebuilt/darwin-x86_64/bin
   
   
 jobs:
@@ -111,7 +111,7 @@ jobs:
       uses: nttld/setup-ndk@v1
       id: setup-ndk
       with:
-        ndk-version: r22b
+        ndk-version: r20b
         add-to-path: true
         
     - name: set config file
@@ -121,6 +121,8 @@ jobs:
         echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.cc }}"' >> /Users/runner/.cargo/config
         cat /Users/runner/.cargo/config
         ls /Users/runner/.cargo/
+        /Users/runner/hostedtoolcache/ndk/
+        
 
     - name: Build
       run: | 
