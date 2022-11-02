@@ -36,7 +36,7 @@ jobs:
 #           loglib: x86_64-linux-android
 #           cross: true
         - build: x86_64
-          os: macos-12
+          os: macos-11
           rust: nightly
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
