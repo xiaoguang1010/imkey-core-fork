@@ -46,7 +46,7 @@ jobs:
     - run: | 
           ls /opt/
           echo $ANDROID_NDK_HOME
-          ls $ANDROID_NDK_HOME/toolchains/x86-4.9/prebuilt/linux-x86_64/i686-linux-android/bin
+          ls $ANDROID_NDK_HOME/toolchains/
           echo aaaaaaaaaaaaa
           ls $ANDROID_NDK_HOME/toolchains/x86-4.9/prebuilt/linux-x86_64/bin
       env:
