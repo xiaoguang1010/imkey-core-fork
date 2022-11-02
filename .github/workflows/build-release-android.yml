@@ -96,10 +96,7 @@ jobs:
         rustup default nightly
         rustup target add ${{ matrix.target }}
         rustup show
-        brew install openssl
-        brew install openssl@1.1
-        brew install pkg-config
-        xcode-select --install
+        brew --prefix openssl
         
 #     - name: Install libusb
 #       run: | 
@@ -127,6 +124,7 @@ jobs:
     - name: Build
       run: | 
         echo ${{ matrix.openssl }}
+        ls /opt/homebrew/opt/
         export OPENSSL_LIB_ROOT_DIR=${{github.workspace}}/depend/openssl
         export OPENSSL_INCLUDE_ROOT_DIR=${{github.workspace}}/depend/openssl
         export OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
