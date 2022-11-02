@@ -124,7 +124,9 @@ jobs:
       run: | 
         echo ${{ matrix.openssl }}
         export OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
+        export X86_64_LINUX_ANDROID_OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
         export OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
+        export X86_64_LINUX_ANDROID_OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
         echo ${{ matrix.ar }}
         echo ${{ matrix.cc }}
         echo ${{ matrix.ld }}
