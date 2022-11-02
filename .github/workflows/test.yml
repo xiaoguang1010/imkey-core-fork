@@ -46,7 +46,7 @@ jobs:
     - run: | 
           ls /opt/
           echo $ANDROID_NDK_HOME
-          ls $ANDROID_NDK_HOME/toolchains/
+          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin
           echo aaaaaaaaaaaaa
 
       env:
