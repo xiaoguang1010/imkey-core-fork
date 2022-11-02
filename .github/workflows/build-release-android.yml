@@ -97,7 +97,7 @@ jobs:
         rustup target add ${{ matrix.target }}
         rustup show
         brew install openssl
-        brew install openssl-dev
+        brew install openssl@1.1
         
 #     - name: Install libusb
 #       run: | 
