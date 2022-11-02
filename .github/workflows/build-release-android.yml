@@ -96,6 +96,7 @@ jobs:
         rustup default nightly
         rustup target add ${{ matrix.target }}
         rustup show
+        brew install openssl
         
 #     - name: Install libusb
 #       run: | 
