@@ -110,12 +110,12 @@ jobs:
         
     - name: Set Config File
       run: |
-        echo '[target.${{ matrix.target }}]' >> /Users/runner/.cargo/config
-        echo 'ar="${{env.ANDROID_NDK_TOOLCHAINS}}/llvm-ar"' >> /Users/runner/.cargo/config
-        echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.linker }}"' >> /Users/runner/.cargo/config
-        cat /Users/runner/.cargo/config
-        ls /Users/runner/.cargo/
-        ls /Users/runner/hostedtoolcache/ndk/
+        echo '[target.${{ matrix.target }}]' >> ~/.cargo/config
+        echo 'ar="${{env.ANDROID_NDK_TOOLCHAINS}}/llvm-ar"' >> ~/.cargo/config
+        echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.linker }}"' >> ~/.cargo/config
+        cat ~/.cargo/config
+        ls ~/.cargo/
+        ls ~/hostedtoolcache/ndk/
 
     - name: Build
       run: | 
