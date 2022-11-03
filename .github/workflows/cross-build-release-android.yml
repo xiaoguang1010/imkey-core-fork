@@ -46,7 +46,7 @@ jobs:
         - build: x86_64
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
-          cross: true
+          openssl: android-x86_64
 #         - build: arm-v7
 #           os: ubuntu-22.04
 #           rust: nightly
@@ -99,13 +99,6 @@ jobs:
        
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2
-       
-#     - name: Android NDK set
-#       uses: nttld/setup-ndk@v1
-#       id: setup-ndk
-#       with:
-#         ndk-version: r25b
-#         add-to-path: true
         
     - name: Set Config File
       run: |
@@ -113,9 +106,7 @@ jobs:
         echo 'ar="${{env.ANDROID_NDK_TOOLCHAINS}}/llvm-ar"' >> ~/.cargo/config
         echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.linker }}"' >> ~/.cargo/config
         cat ~/.cargo/config
-        ls ~/.cargo/
-        ls /usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin
 
     - name: Build
       run: | 
-        AR=$ANDROID_NDK_TOOLCHAINS/llvm-ar CC=$ANDROID_NDK_TOOLCHAINS/x86_64-linux-android29-clang  LD=$ANDROID_NDK_TOOLCHAINS/ld PKG_CONFIG_ALLOW_CROSS=1 OPENSSL_DIR=$OPENSSL_DIR/android-x86_64 LDFLAGS=-L$OPENSSL_DIR/android-x86_64/lib/ CPPFLAGS=-I$OPENSSL_DIR/android-x86_64/include cargo build --target x86_64-linux-android --release
+        AR=$ANDROID_NDK_TOOLCHAINS/llvm-ar CC=$ANDROID_NDK_TOOLCHAINS/${{ matrix.linker }}  LD=$ANDROID_NDK_TOOLCHAINS/ld PKG_CONFIG_ALLOW_CROSS=1 OPENSSL_DIR=$OPENSSL_DIR/${{ matrix.linker }} LDFLAGS=-L$OPENSSL_DIR/${{ matrix.linker }}/lib/ CPPFLAGS=-I$OPENSSL_DIR/${{ matrix.linker }}/include cargo build --target ${{ matrix.target }} --release
