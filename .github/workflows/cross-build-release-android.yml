@@ -46,7 +46,6 @@ jobs:
         - build: x86_64
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
-          openssl: android-x86_64
           cross: true
 #         - build: arm-v7
 #           os: ubuntu-22.04
@@ -115,18 +114,14 @@ jobs:
         echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.linker }}"' >> ~/.cargo/config
         cat ~/.cargo/config
         ls ~/.cargo/
-        ls ~/hostedtoolcache/ndk/
 
     - name: Build
       run: | 
-        ls /opt/hostedtoolcache/ndk/r25b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/
-        echo ${{ matrix.openssl }}
-        export OPENSSL_LIB_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/lib
-        export OPENSSL_INCLUDE_DIR=${{github.workspace}}/depend/openssl/${{ matrix.openssl }}/include
         echo ${{ matrix.linker }}
         AR=/opt/hostedtoolcache/ndk/r25b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar
         CC=/opt/hostedtoolcache/ndk/r25b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.linker }}
         LD=/opt/hostedtoolcache/ndk/r25b/x64/toolchains/llvm/prebuilt/linux-x86_64/bin/ld
+        PKG_CONFIG_ALLOW_CROSS=1
         env OPENSSL_STATIC=1
         echo ${{ matrix.target }}
         cargo build --release --target ${{ matrix.target }}
