@@ -45,8 +45,8 @@ jobs:
 #         add-to-path: true
 #         local-cache: false
       
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v1.0.0
+#     - name: Setup Android SDK
+#       uses: android-actions/setup-android@v1.0.0
     
 #     - run: | 
 #           echo 11111
