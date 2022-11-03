@@ -24,17 +24,17 @@ jobs:
     strategy:
       matrix:
         include:
-#         - build: x86
-#           os: ubuntu-latest
-#           rust: nightly
-#           target: i686-linux-android
-#           linker: i686-linux-android29-clang
-#           ar: i686-linux-android-ar
-#           cc: i686-linux-android29-clang
-#           ld: i686-linux-android-ld
-#           openssl: android-x86_64
-#           loglib: x86_64-linux-android
-#           cross: true
+        - build: x86
+          os: ubuntu-latest
+          rust: nightly
+          target: i686-linux-android
+          linker: i686-linux-android29-clang
+          ar: i686-linux-android-ar
+          cc: i686-linux-android29-clang
+          ld: i686-linux-android-ld
+          openssl: android-x86_64
+          loglib: x86_64-linux-android
+          cross: true
 #         - build: x86_64
 #           os: macos-11
 #           rust: nightly
@@ -46,17 +46,17 @@ jobs:
 #           openssl: android-x86_64
 #           loglib: x86_64-linux-android
 #           cross: true
-        - build: arm-v7
-          os: macos-11
-          rust: nightly
-          target: armv7-linux-androideabi
-          linker: armv7a-linux-androideabi29-clang
-          ar: arm-linux-androideabi-ar
-          cc: armv7a-linux-androideabi29-clang
-          ld: arm-linux-androideabi-ld
-          openssl: android-arm
-          loglib: armv7-linux-androideabi
-          cross: true
+#         - build: arm-v7
+#           os: macos-11
+#           rust: nightly
+#           target: armv7-linux-androideabi
+#           linker: armv7a-linux-androideabi29-clang
+#           ar: arm-linux-androideabi-ar
+#           cc: armv7a-linux-androideabi29-clang
+#           ld: arm-linux-androideabi-ld
+#           openssl: android-arm
+#           loglib: armv7-linux-androideabi
+#           cross: true
 #         - build: aarch64
 #           os: ubuntu-latest
 #           rust: nightly
