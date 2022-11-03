@@ -25,7 +25,7 @@ jobs:
       matrix:
         include:
         - build: x86
-          os: ubuntu-latest
+          os: macos-11
           rust: nightly
           target: i686-linux-android
           linker: i686-linux-android29-clang
