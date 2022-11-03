@@ -46,7 +46,7 @@ jobs:
 #         local-cache: false
       
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v1
+      uses: android-actions/setup-android@v2
     
     - run: | 
           echo 11111
