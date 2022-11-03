@@ -38,25 +38,24 @@ jobs:
 #     - run: | 
 #           rustup show 
 
-#     - uses: nttld/setup-ndk@v1.2.0
-#       id: setup-ndk
-#       with:
-#         ndk-version: r22b
-#         add-to-path: true
-#         local-cache: false
+    - uses: nttld/setup-ndk@v1.2.0
+      id: setup-ndk
+      with:
+        ndk-version: r22b
+        add-to-path: true
       
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2.0.6
     
-    - run: | 
-          echo 11111
-          ls /Users/runner/Library/Android/sdk/ndk
-          echo 22222
-          ls -a ~/
-          ls /opt/
-          echo $ANDROID_NDK_HOME
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin
-          echo aaaaaaaaaaaaa
+#     - run: | 
+#           echo 11111
+#           ls /Users/runner/Library/Android/sdk/ndk
+#           echo 22222
+#           ls -a ~/
+#           ls /opt/
+#           echo $ANDROID_NDK_HOME
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin
+#           echo aaaaaaaaaaaaa
 
-      env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+#       env:
+#         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
