@@ -38,12 +38,12 @@ jobs:
 #     - run: | 
 #           rustup show 
 
-    - uses: nttld/setup-ndk@v1.2.0
-      id: setup-ndk
-      with:
-        ndk-version: r22b
-        add-to-path: true
-        local-cache: false
+#     - uses: nttld/setup-ndk@v1.2.0
+#       id: setup-ndk
+#       with:
+#         ndk-version: r22b
+#         add-to-path: true
+#         local-cache: false
       
     - name: Setup Android SDK
       uses: android-actions/setup-android@v1
