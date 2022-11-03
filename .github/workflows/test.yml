@@ -46,17 +46,17 @@ jobs:
 #         local-cache: false
       
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+      uses: android-actions/setup-android@v1.0.0
     
-    - run: | 
-          echo 11111
-          ls /Users/runner/Library/Android/sdk/ndk
-          echo 22222
-          ls -a ~/
-          ls /opt/
-          echo $ANDROID_NDK_HOME
-          ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin
-          echo aaaaaaaaaaaaa
+#     - run: | 
+#           echo 11111
+#           ls /Users/runner/Library/Android/sdk/ndk
+#           echo 22222
+#           ls -a ~/
+#           ls /opt/
+#           echo $ANDROID_NDK_HOME
+#           ls $ANDROID_NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin
+#           echo aaaaaaaaaaaaa
 
-      env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+#       env:
+#         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
