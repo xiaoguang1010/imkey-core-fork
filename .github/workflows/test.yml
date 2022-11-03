@@ -50,7 +50,7 @@ jobs:
     
     - run: | 
           echo 11111
-          ls /Users/runner/Library/Android/sdk
+          ls /Users/runner/Library/Android/sdk/ndk
           echo 22222
           ls -a ~/
           ls /opt/
