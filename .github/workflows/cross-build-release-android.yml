@@ -118,6 +118,7 @@ jobs:
 
     - name: Build
       run: | 
+        PATH=$PATH:$ANDROID_NDK_TOOLCHAINS
         echo ${{ matrix.linker }}
         AR=/usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar
         CC=/usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin/${{ matrix.linker }}
