@@ -100,12 +100,12 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2
        
-    - name: Android NDK set
-      uses: nttld/setup-ndk@v1
-      id: setup-ndk
-      with:
-        ndk-version: r25b
-        add-to-path: true
+#     - name: Android NDK set
+#       uses: nttld/setup-ndk@v1
+#       id: setup-ndk
+#       with:
+#         ndk-version: r25b
+#         add-to-path: true
         
     - name: Set Config File
       run: |
@@ -114,7 +114,7 @@ jobs:
         echo 'linker="${{env.ANDROID_NDK_TOOLCHAINS}}/${{ matrix.linker }}"' >> ~/.cargo/config
         cat ~/.cargo/config
         ls ~/.cargo/
-        ls /usr/local/lib/android/sdk/ndk/25.1.8937393/
+        ls /usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin
 
 #     - name: Build
 #       run: | 
