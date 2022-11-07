@@ -70,7 +70,19 @@ jobs:
         
         lipo -create -output $UNIVERSAL_OUTPUTFOLDER/$PROJECT_NAME.framework/$PROJECT_NAME $BUILD_PRODUCTS/Debug-iphonesimulator/$PROJECT_NAME.framework/$PROJECT_NAME $BUILD_DIR/$CONFIGURATION-iphoneos/$PROJECT_NAME.framework/$PROJECT_NAME
         
-        cp -R $UNIVERSAL_OUTPUTFOLDER/$PROJECT_NAME.framework ../../ios-release
-        rm -rf $UNIVERSAL_OUTPUTFOLDER
-        
+        cp -R $UNIVERSAL_OUTPUTFOLDER/ ../../ios-release
+        rm -rf $UNIVERSAL_OUTPUTFOLDER 
         popd
+        
+    - name: Publish To Nuexs
+      run: |
+        pushd ./ios-release
+        PACKAGE_NAME=ios-release-test1.zip
+        zip -q -r $PACKAGE_NAME .
+        ls ./ios-release
+#        curl -v -u xuyunzhao:${{secrets.NEXUS_PASSWORD}} --upload-file $PACKAGE_NAME https://nexus.token.im/repository/im-releases/im/imkey/ios/test1/$PACKAGE_NAME
+#        popd
+        
+      
+      
+      
