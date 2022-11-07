@@ -21,6 +21,6 @@ jobs:
         tag=${{ github.ref }}
         echo $tag
         echo ${tag: 10}
-        zip -q -r tttttttt.zip . ./mobile-sdk
+        zip -q -r tttttttt.zip ./mobile-sdk
         ls
         
