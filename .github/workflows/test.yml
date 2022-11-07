@@ -2,8 +2,7 @@ name: Test
 
 on:
   push:
-    tags:
-    - '*'
+    branches: [ "develop" ]
 
 jobs:
   build:
@@ -16,12 +15,12 @@ jobs:
       run: |
         pwd
         echo aaa
-        pushd ./
+        cd ${{github.workspace}}
+        pwd
         ls -a
         tag=${{ github.ref }}
         echo $tag
         echo ${tag: 10}
         zip -q -r tttttttt.zip . ./mobile-sdk
         ls
-        popd
         
