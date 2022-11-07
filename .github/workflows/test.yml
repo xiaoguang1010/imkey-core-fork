@@ -16,10 +16,12 @@ jobs:
       run: |
         pwd
         echo aaa
+        pushd ./
         ls -a
         tag=${{ github.ref }}
         echo $tag
         echo ${tag: 10}
         zip -q -r tttttttt.zip . ./mobile-sdk
         ls
+        popd
         
