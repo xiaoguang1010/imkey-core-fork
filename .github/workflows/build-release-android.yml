@@ -1,10 +1,9 @@
-name: Cross Build Release Android
+name: Build Release Android
 
 on:
   push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
+    tags:
+    - v*
 
 env:
   CARGO_TERM_COLOR: always
