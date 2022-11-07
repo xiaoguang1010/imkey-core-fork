@@ -16,7 +16,7 @@ jobs:
       run: |
         pwd
         echo aaa
-        ls
+        ls -a
         tag=${{ github.ref }}
         echo $tag
         echo ${tag: 10}
