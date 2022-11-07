@@ -1,9 +1,7 @@
 name: Rust
 
 on:
-  push:
-    tags: 
-    - '*'
+  create
 
 env:
   CARGO_TERM_COLOR: always
