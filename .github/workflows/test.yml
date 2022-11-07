@@ -17,4 +17,4 @@ jobs:
         pwd
         echo aaa
         ls
-        echo ${{ github.ref }}
+        echo ${${{ github.ref }}: 10}
