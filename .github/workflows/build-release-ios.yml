@@ -79,7 +79,7 @@ jobs:
         VERSION_NAME=${TAG_NAME: 10}
         PACKAGE_NAME=ios-release-$VERSION_NAME.zip
         ls
-        zip -q -r $PACKAGE_NAME ./ios-releas
+        zip -q -r $PACKAGE_NAME ./ios-release
         curl -v -u xuyunzhao:${{secrets.NEXUS_PASSWORD}} --upload-file $PACKAGE_NAME https://nexus.token.im/repository/im-releases/im/imkey/ios/$VERSION_NAME/$PACKAGE_NAME
         
       
