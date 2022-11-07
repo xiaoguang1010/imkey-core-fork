@@ -18,5 +18,5 @@ jobs:
         echo aaa
         ls
         tag=${{ github.ref }}
-        echo tag
+        echo $tag
         echo ${tag: 10}
