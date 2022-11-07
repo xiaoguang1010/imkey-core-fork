@@ -2,9 +2,7 @@ name: Build Release Android
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: [ "develop" ]
 
 env:
   CARGO_TERM_COLOR: always
@@ -26,7 +24,7 @@ env:
   
 jobs:
 
-  publish-to-github:
+  cross-compile:
     name: cross compile and publish
     runs-on: ubuntu-22.04
     strategy:
@@ -89,3 +87,14 @@ jobs:
     - name: Build
       run: | 
         AR=$ANDROID_NDK_TOOLCHAINS/llvm-ar CC=$ANDROID_NDK_TOOLCHAINS/${{ matrix.linker }}  LD=$ANDROID_NDK_TOOLCHAINS/ld PKG_CONFIG_ALLOW_CROSS=1 OPENSSL_DIR=$OPENSSL_DIR/${{ matrix.linker }} LDFLAGS=-L$OPENSSL_DIR/${{ matrix.linker }}/lib/ CPPFLAGS=-I$OPENSSL_DIR/${{ matrix.linker }}/include cargo build --target ${{ matrix.target }} --release
+  
+  publish:
+    runs-on: ubuntu-22.04
+    needs: cross-compile
+    steps:
+    - name: package and Publish
+      run: |
+        pwd
+        ls
+      
+        
