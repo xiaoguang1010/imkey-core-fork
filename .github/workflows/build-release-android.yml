@@ -30,22 +30,22 @@ jobs:
     strategy:
       matrix:
         include:
-        - build: x86
-          target: i686-linux-android
-          linker: i686-linux-android29-clang
-          openssl: android-x86
+#         - build: x86
+#           target: i686-linux-android
+#           linker: i686-linux-android29-clang
+#           openssl: android-x86
         - build: x86_64
           target: x86_64-linux-android
           linker: x86_64-linux-android29-clang
           openssl: android-x86_64
-        - build: arm-v7
-          target: armv7-linux-androideabi
-          linker: armv7a-linux-androideabi29-clang
-          openssl: android-arm
-        - build: aarch64
-          target: aarch64-linux-android
-          linker: aarch64-linux-android29-clang
-          openssl: android-arm64
+#         - build: arm-v7
+#           target: armv7-linux-androideabi
+#           linker: armv7a-linux-androideabi29-clang
+#           openssl: android-arm
+#         - build: aarch64
+#           target: aarch64-linux-android
+#           linker: aarch64-linux-android29-clang
+#           openssl: android-arm64
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -92,13 +92,21 @@ jobs:
         echo aaaaaaa
         cd ./target
         ls
-        
-        
+    - name: Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.target }}
+        path: ./target/${{ matrix.target }}/release/libconnector.so
   publish:
     runs-on: ubuntu-22.04
     needs: cross-compile
     steps:
     - name: package and Publish
+      uses: actions/download-artifact@v3
+      with:
+        name: x86_64-linux-android
+    - name: Print the final result
+      shell: bash
       run: |
         pwd
         ls
