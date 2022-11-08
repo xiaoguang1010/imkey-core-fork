@@ -101,14 +101,59 @@ jobs:
     runs-on: ubuntu-22.04
     needs: cross-compile
     steps:
-    - name: package and Publish
+    - name: Download x86_64
       uses: actions/download-artifact@v3
       with:
         name: x86_64-linux-android
+    - run: |
+        pwd
+        ls
+        TAG_NAME=${{ github.ref }}
+        VERSION_NAME=${TAG_NAME: 10}
+        mkdir --parents ./android-release-$VERSION_NAME/x86_64/; mv -fv libconnector.so $_
+        
+    - name: Download x86
+      uses: actions/download-artifact@v3
+      with:
+        name: i686-linux-android
+    - run: |
+        pwd
+        ls  
+        TAG_NAME=${{ github.ref }}
+        VERSION_NAME=${TAG_NAME: 10}
+        mkdir --parents ./android-release-$VERSION_NAME/x86/; mv -fv libconnector.so $_
+        
+    - name: Download arm64-v8a
+      uses: actions/download-artifact@v3
+      with:
+        name: armv7-linux-androideabi
+    - run: |
+        pwd
+        ls    
+        TAG_NAME=${{ github.ref }}
+        VERSION_NAME=${TAG_NAME: 10}
+        mkdir --parents ./android-release-$VERSION_NAME/arm64-v8a/; mv -fv libconnector.so $_
+        
+    - name: Download armeabi-v7a
+      uses: actions/download-artifact@v3
+      with:
+        name: aarch64-linux-android
+    - run: |
+        pwd
+        ls    
+        TAG_NAME=${{ github.ref }}
+        VERSION_NAME=${TAG_NAME: 10}
+        mkdir --parents ./android-release-$VERSION_NAME/armeabi-v7a/; mv -fv libconnector.so $_
+        
     - name: Print the final result
       shell: bash
       run: |
         pwd
+        TAG_NAME=${{ github.ref }}
+        VERSION_NAME=${TAG_NAME: 10}
+        cd ./android-release-$VERSION_NAME
+        ls
+        cd ./android-release-$VERSION_NAME/x86_64
         ls
       
         
