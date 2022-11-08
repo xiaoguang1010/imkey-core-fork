@@ -26,7 +26,7 @@ env:
 jobs:
 
   cross-compile:
-    name: cross compile and publish
+    name: cross compile
     runs-on: ubuntu-22.04
     strategy:
       matrix:
