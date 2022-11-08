@@ -2,7 +2,8 @@ name: Build Release Android
 
 on:
   push:
-    branches: [ "develop" ]
+    tags:
+    - '*'
 
 env:
   CARGO_TERM_COLOR: always
@@ -87,11 +88,7 @@ jobs:
     - name: Build
       run: | 
         AR=$ANDROID_NDK_TOOLCHAINS/llvm-ar CC=$ANDROID_NDK_TOOLCHAINS/${{ matrix.linker }}  LD=$ANDROID_NDK_TOOLCHAINS/ld PKG_CONFIG_ALLOW_CROSS=1 OPENSSL_DIR=$OPENSSL_DIR/${{ matrix.linker }} LDFLAGS=-L$OPENSSL_DIR/${{ matrix.linker }}/lib/ CPPFLAGS=-I$OPENSSL_DIR/${{ matrix.linker }}/include cargo build --target ${{ matrix.target }} --release
-        pwd
-        ls
-        echo aaaaaaa
-        cd ./target
-        ls
+        
     - name: Artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -106,54 +103,50 @@ jobs:
       with:
         name: x86_64-linux-android
     - run: |
-        pwd
-        ls
         TAG_NAME=${{ github.ref }}
         VERSION_NAME=${TAG_NAME: 10}
-        mkdir --parents ./android-release-$VERSION_NAME/x86_64/; mv -fv libconnector.so $_
+        mkdir -p ./android-release-$VERSION_NAME/x86_64/; mv -fv libconnector.so $_/x86_64.so
         
     - name: Download x86
       uses: actions/download-artifact@v3
       with:
         name: i686-linux-android
-    - run: |
-        pwd
-        ls  
+    - run: | 
         TAG_NAME=${{ github.ref }}
         VERSION_NAME=${TAG_NAME: 10}
-        mkdir --parents ./android-release-$VERSION_NAME/x86/; mv -fv libconnector.so $_
+        mkdir -p ./android-release-$VERSION_NAME/x86/; mv -fv libconnector.so $_/i686.so
         
     - name: Download arm64-v8a
       uses: actions/download-artifact@v3
       with:
         name: armv7-linux-androideabi
-    - run: |
-        pwd
-        ls    
+    - run: |   
         TAG_NAME=${{ github.ref }}
         VERSION_NAME=${TAG_NAME: 10}
-        mkdir --parents ./android-release-$VERSION_NAME/arm64-v8a/; mv -fv libconnector.so $_
+        mkdir -p ./android-release-$VERSION_NAME/arm64-v8a/; mv -fv libconnector.so $_/arm64.so
         
     - name: Download armeabi-v7a
       uses: actions/download-artifact@v3
       with:
         name: aarch64-linux-android
-    - run: |
-        pwd
-        ls    
+    - run: |  
         TAG_NAME=${{ github.ref }}
         VERSION_NAME=${TAG_NAME: 10}
-        mkdir --parents ./android-release-$VERSION_NAME/armeabi-v7a/; mv -fv libconnector.so $_
+        mkdir -p ./android-release-$VERSION_NAME/armeabi-v7a/; mv -fv libconnector.so $_/armeabi.so
         
-    - name: Print the final result
+    - name: Publish To Nuxes
       shell: bash
       run: |
         pwd
         TAG_NAME=${{ github.ref }}
         VERSION_NAME=${TAG_NAME: 10}
+        PACKAGE_NAME=android-release-$VERSION_NAME.zip
+        zip -q -r $PACKAGE_NAME ./android-release-$VERSION_NAME
+        ls
+        curl -v -u xuyunzhao:${{secrets.NEXUS_PASSWORD}} --upload-file $PACKAGE_NAME https://nexus.token.im/repository/im-releases/im/imkey/android/$VERSION_NAME/$PACKAGE_NAME
         cd ./android-release-$VERSION_NAME
         ls
-        cd ./android-release-$VERSION_NAME/x86_64
+        cd ./x86_64
         ls
       
         
