@@ -3,7 +3,7 @@ name: Build Release IOS
 on:
   push:
     tags:
-    - '*'
+    - 'v*'
 
 env:
   CARGO_TERM_COLOR: always
@@ -77,7 +77,7 @@ jobs:
       run: |
         pushd ios-release
         TAG_NAME=${{ github.ref }}
-        VERSION_NAME=${TAG_NAME: 10}
+        VERSION_NAME=${TAG_NAME: 11}
         PACKAGE_NAME=ios-release-v$VERSION_NAME.zip
         zip -q -r $PACKAGE_NAME .
         curl -v -u xuyunzhao:${{secrets.NEXUS_PASSWORD}} --upload-file $PACKAGE_NAME https://nexus.token.im/repository/im-releases/im/imkey/ios/$VERSION_NAME/$PACKAGE_NAME
