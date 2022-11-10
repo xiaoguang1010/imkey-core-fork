@@ -28,5 +28,6 @@ jobs:
         echo ${tag: 10}
         zip -q -r tttttttt.zip ./mobile-sdk
         ls
+        brew install libusb
         popd
         
