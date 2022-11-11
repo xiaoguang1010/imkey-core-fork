@@ -12,22 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
-    
-    - name: Install opssl
+#     - name: Setup Android SDK
+#       uses: android-actions/setup-android@v2
+
+    - name: Install Rust
       run: |
-        pushd ./
-        pwd
-        echo aaa
-        cd ${{github.workspace}}
-        pwd
-        ls -a
-        tag=${{ github.ref }}
-        echo $tag
-        echo ${tag: 10}
-        zip -q -r tttttttt.zip ./mobile-sdk
-        ls
-        brew install libusb
-        popd
+        rustup install 1.47.0
+        rustup default nightly
+        rustup target add aarch64-apple-ios x86_64-apple-ios
+        rustup show
+        cargo install cargo-lipo
         
