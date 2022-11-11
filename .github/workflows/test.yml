@@ -19,7 +19,7 @@ jobs:
       run: |
         rustup install 1.47.0
         echo aaaaaaa
-        rrustup default 1.47.0-x86_64-apple-darwin
+        rustup default 1.47.0-x86_64-apple-darwin
         echo ccccccc
         rustup target add aarch64-apple-ios x86_64-apple-ios
         rustup show
