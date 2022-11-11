@@ -32,8 +32,7 @@ jobs:
 
     - name: Install Rust
       run: |
-        rustup install stable
-        rustup default nightly
+        rustup install 1.47.0
         rustup target add aarch64-apple-ios x86_64-apple-ios
         rustup show
         cargo install cargo-lipo
