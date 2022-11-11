@@ -20,7 +20,9 @@ jobs:
         rustup install 1.47.0
         rustup toolchain install nightly-2020-10-07
         rustup default nightly-2020-10-07
+        echo aaaaaaa
         rustup target add aarch64-apple-ios x86_64-apple-ios
         rustup show
+        echo bbbbbb
         cargo install cargo-lipo
         
