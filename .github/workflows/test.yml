@@ -17,7 +17,7 @@ jobs:
 
     - name: Install Rust
       run: |
-        rustup install 1.47.0
+        rustup install 1.67.0
         echo aaaaaaa
         rustup default nightly
         echo ccccccc
