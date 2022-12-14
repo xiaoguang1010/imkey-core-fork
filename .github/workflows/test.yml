@@ -17,8 +17,9 @@ jobs:
 
     - name: Install Rust
       run: |
-        rustup install nightly-2022-12-06
+        rustup install stable
         echo ccccccc
+        rustup default nightly
         rustup target add aarch64-apple-ios x86_64-apple-ios
         rustup show
         echo bbbbbb
