@@ -12,23 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-#     - name: Setup Android SDK
-#       uses: android-actions/setup-android@v2
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
 
     - name: Install Rust
       run: |
-        rustup install stable
-        echo ccccccc
-        rustup show
-        echo aaaaaaaa
-        rustup default nightly
-        rustup target add aarch64-apple-ios x86_64-apple-ios
-        rustup show
-        echo bbbbbb
-        gcc -v
-        sudo apt update
-        sudo apt install gcc
-        gcc -v
-        sudo apt-get update
-        sudo apt-get reinstall gcc
-        gcc -v
+        ls /usr/local/lib/android/sdk/ndk/
