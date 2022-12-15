@@ -22,10 +22,11 @@ jobs:
         # Add installation directory to the PATH
         add-to-path: true
         # Use the local job cache on top of the runner tool cache
-        local-cache: true
+        local-cache: false
 
     - name: Install Rust
       run: |
+        echo $PATH
         ls /usr/local/lib/android/sdk/ndk/
         echo aaaaa
         ls /usr/local/lib/android/sdk/ndk/23.2.8568313/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc
