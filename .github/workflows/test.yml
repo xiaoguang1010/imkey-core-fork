@@ -12,8 +12,17 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v1
+#     - name: Setup Android SDK
+#       uses: android-actions/setup-android@v1
+    - name: Setup Android NDK
+      uses: nttld/setup-ndk@v1.2.0
+      with:
+        # Exact version to use
+        ndk-version: r22b
+        # Add installation directory to the PATH
+        add-to-path: true
+        # Use the local job cache on top of the runner tool cache
+        local-cache: true
 
     - name: Install Rust
       run: |
