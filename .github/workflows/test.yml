@@ -28,4 +28,7 @@ jobs:
         gcc -v
         sudo apt update
         sudo apt install gcc
-        
+        gcc -v
+        sudo apt-get update
+        sudo apt-get reinstall gcc
+        gcc -v
