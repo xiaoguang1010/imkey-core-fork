@@ -26,5 +26,6 @@ jobs:
         rustup show
         echo bbbbbb
         gcc -v
-        sudo apt-get update gcc
+        sudo apt update
+        sudo apt install gcc
         
