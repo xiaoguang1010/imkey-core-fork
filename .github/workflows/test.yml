@@ -18,3 +18,6 @@ jobs:
     - name: Install Rust
       run: |
         ls /usr/local/lib/android/sdk/ndk/
+        ls /usr/local/lib/android/sdk/ndk/23.2.8568313/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc
+        cp -rf /usr/local/lib/android/sdk/ndk/23.2.8568313/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc /usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib
+        ls /usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib
