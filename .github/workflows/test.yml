@@ -12,25 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-#     - name: Setup Android SDK
-#       uses: android-actions/setup-android@v1
-    - name: Setup Android NDK
-      uses: nttld/setup-ndk@v1.2.0
-      with:
-        # Exact version to use
-        ndk-version: r22b
-        # Add installation directory to the PATH
-        add-to-path: true
-        # Use the local job cache on top of the runner tool cache
-        local-cache: false
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
 
     - name: Install Rust
       run: |
-        echo $PATH
-        ls /usr/local/lib/android/sdk/ndk/
-        echo aaaaa
-        ls /usr/local/lib/android/sdk/ndk/23.2.8568313/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc
-        echo aaaaa
-        cp -rf /usr/local/lib/android/sdk/ndk/23.2.8568313/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc /usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib
-        echo aaaaa
-        ls /usr/local/lib/android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib
+        rustup install nightly-2022-10-30
+        rustup show
