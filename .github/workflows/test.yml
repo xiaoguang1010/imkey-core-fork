@@ -17,5 +17,4 @@ jobs:
 
     - name: Install Rust
       run: |
-        rustup -h
         rustup show
