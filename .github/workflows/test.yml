@@ -17,6 +17,5 @@ jobs:
 
     - name: Install Rust
       run: |
-        rustup install 1.60.0-nightly
-        rustup default 1.60.0-nightly
+        rustup install 1.67.0-nightly
         rustup show
