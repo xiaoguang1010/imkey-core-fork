@@ -18,4 +18,5 @@ jobs:
     - name: Install Rust
       run: |
         rustup install nightly-2022-07-12
+        rustup default nightly-2022-07-12
         rustup show
