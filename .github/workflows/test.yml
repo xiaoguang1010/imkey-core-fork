@@ -26,3 +26,6 @@ jobs:
       run: |
         rustup show
         rustup -h
+        rustup default nightly
+        rustup show
+        rustup -h
