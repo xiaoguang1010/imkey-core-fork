@@ -21,27 +21,12 @@ jobs:
 #           toolchain: nightly-2022-07-12
 #           override: true
 #           components: rustfmt, clippy
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+         gradle-version: 6.5
+
           
     - name: Install Rust
       run: |
-        rustup show
-        echo aaaaaa
-        rustup -V
-        echo bbbbb
-        rustc -V
-        echo cccccc
-        cargo -V
-        echo dddddddd
-        rustup default nightly
-        echo eeeeee
-        rustup show
-        echo ffffff
-        rustup -V
-        echo gggggg
-        rustc -V
-        echo hhhhhhh
-        cargo -V
-        echo iiiiii
-        rustup toolchain install nightly-2022-10-31
-        rustup default nightly-2022-10-31-x86_64-unknown-linux-gnu
-        rustup show
+       gradle -v
