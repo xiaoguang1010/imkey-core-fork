@@ -43,4 +43,5 @@ jobs:
         cargo -V
         echo iiiiii
         rustup toolchain install nightly-2022-10-31
+        rustup default nightly-2022-10-31-x86_64-unknown-linux-gnu
         rustup show
