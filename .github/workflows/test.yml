@@ -15,17 +15,16 @@ jobs:
 #     - name: Setup Android SDK
 #       uses: android-actions/setup-android@v2
 
-    - name: Install latest nightly
-      uses: actions-rs/toolchain@v1
-      with:
-          toolchain: nightly-2022-07-12
-          override: true
-          components: rustfmt, clippy
+#     - name: Install latest nightly
+#       uses: actions-rs/toolchain@v1
+#       with:
+#           toolchain: nightly-2022-07-12
+#           override: true
+#           components: rustfmt, clippy
           
     - name: Install Rust
       run: |
         rustup show
-        rustup -h
-        rustup default nightly
-        rustup show
-        rustup -h
+        rustup -V
+        rustc -V
+        cargo -V
