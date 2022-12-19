@@ -25,6 +25,19 @@ jobs:
     - name: Install Rust
       run: |
         rustup show
+        echo aaaaaa
         rustup -V
+        echo bbbbb
         rustc -V
+        echo cccccc
+        cargo -V
+        echo dddddddd
+        rustup default nightly
+        echo eeeeee
+        rustup show
+        echo ffffff
+        rustup -V
+        echo gggggg
+        rustc -V
+        echo hhhhhhh
         cargo -V
