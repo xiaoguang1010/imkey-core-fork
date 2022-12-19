@@ -41,3 +41,6 @@ jobs:
         rustc -V
         echo hhhhhhh
         cargo -V
+        echo iiiiii
+        rustup toolchain install nightly-2022-10-30
+        rustup show
