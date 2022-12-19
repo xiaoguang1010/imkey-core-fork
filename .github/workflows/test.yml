@@ -42,5 +42,5 @@ jobs:
         echo hhhhhhh
         cargo -V
         echo iiiiii
-        rustup toolchain install nightly-20222-11-01
+        rustup toolchain install nightly-20222-10-30
         rustup show
