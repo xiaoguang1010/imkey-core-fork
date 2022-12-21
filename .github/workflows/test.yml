@@ -7,7 +7,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-22.04
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -21,12 +21,17 @@ jobs:
 #           toolchain: nightly-2022-07-12
 #           override: true
 #           components: rustfmt, clippy
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-      with:
-         gradle-version: 7.0.1
+#     - name: Setup Gradle
+#       uses: gradle/gradle-build-action@v2
+#       with:
+#          gradle-version: 7.0.1
 
           
     - name: Install Rust
       run: |
-       gradle -v
+        rustup install 1.47.0
+        rustup default 1.47.0-x86_64-apple-darwin
+        rustup target add aarch64-apple-ios x86_64-apple-ios
+        rustup show
+        cargo install cargo-lipo
+        rustup show
