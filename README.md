@@ -14,6 +14,7 @@ WARNING: not production ready yet.
 * `common` | `transport` common interface
 * `common` imKey management function
 * `mobile-sdk` mobile sdk 
+* test
 
 
 ## Test Coverage
